@@ -27,7 +27,7 @@ namespace ChannelLinkerBot.Modules
                 "**.CreateLink [FromChannelID] [ToChannelID]** (Creates a link from the first channel to the second channel)" + Environment.NewLine +
                 "**.ResetLinks** (Removes all links and Removes all prefixes)" + Environment.NewLine +
                 "**.Prefix [prefix message here]** (Lets you make the bot say something before it repeats the message)" + Environment.NewLine +
-                "*(You can use [USER] and [CHANNEL] to make it specifi who and where it came from)*"
+                "*(You can use [TIME] [USER] and [CHANNEL] to make it specific when, who and where it came from)*"
                 );
         }
         [Command("resetlinks")]

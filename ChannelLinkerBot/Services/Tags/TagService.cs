@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using System;
 using System.Threading.Tasks;
 
 namespace UtilityBot.Services.Tags
@@ -30,7 +31,8 @@ namespace UtilityBot.Services.Tags
                 
                 foreach (var tag in Database.Tags)
                 {
-                    module.AddCommand(tag.Name, async (context, args, map) =>
+
+                    module.AddCommand(tag.Name, async (context, args, map, ci) =>
                     {
                         var builder = new EmbedBuilder()
                             .WithTitle(tag.Name)
@@ -40,6 +42,8 @@ namespace UtilityBot.Services.Tags
                             builder.Author = new EmbedAuthorBuilder()
                                 .WithIconUrl(user.GetAvatarUrl())
                                 .WithName(user.Username);
+
+                        
 
                         await context.Channel.SendMessageAsync("", embed: builder.Build());
                     }, builder =>

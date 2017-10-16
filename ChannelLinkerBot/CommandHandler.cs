@@ -42,6 +42,7 @@ namespace UtilityBot
             _commands.Log += log.LogCommand;
             _config = _provider.GetService<Config>();
             _logger = _provider.GetService<Logger>().ForContext<CommandService>();
+            _client.SetGameAsync("Watching you");
             try
             {
 

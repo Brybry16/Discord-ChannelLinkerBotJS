@@ -42,7 +42,6 @@ namespace UtilityBot
             _commands.Log += log.LogCommand;
             _config = _provider.GetService<Config>();
             _logger = _provider.GetService<Logger>().ForContext<CommandService>();
-            _client.SetGameAsync(".? for commands");
             try
             {
 
@@ -108,13 +107,13 @@ namespace UtilityBot
                                     }
                                     else
                                     {
-                                        await To.SendMessageAsync("", false, SimpleEmbed(new Color(1f, 1f, 1f), "Message in " + From.Name, prefix.Prefix.Replace("[EMBED]", "").Replace("[CHANNEL]", "**" + From.Name + "**").Replace("[USER]", context.User.Mention).Replace("[_USER_]", "**" + context.User.Username + "**") + "  :  " + context.Message.Content));
+                                        await To.SendMessageAsync("", false, SimpleEmbed(new Color(1f, 1f, 1f), "Message in " + From.Name, prefix.Prefix.Replace("[EMBED]", "").Replace("[TIME]", "[" + DateTime.Now.ToString("HH:mm") + "]").Replace("[CHANNEL]", "**" + From.Name + "**").Replace("[USER]", context.User.Mention).Replace("[_USER_]", "**" + context.User.Username + "**") + "  :  " + context.Message.Content));
                                     }
 
                                 }
                                 else
                                 {
-                                    await To.SendMessageAsync("*" + prefix.Prefix.Replace("[CHANNEL]", "**" + From.Name + "**").Replace("[USER]", context.User.Mention).Replace("[_USER_]", "**" + context.User.Username + "**") + "* : " + context.Message.Content);
+                                    await To.SendMessageAsync("*" + prefix.Prefix.Replace("[TIME]", "[" + DateTime.Now.ToString("HH:mm") + "]").Replace("[CHANNEL]", "**" + From.Name + "**").Replace("[USER]", context.User.Mention).Replace("[_USER_]", "**" + context.User.Username + "**") + "* " + context.Message.Content);
                                 }
 
                             }

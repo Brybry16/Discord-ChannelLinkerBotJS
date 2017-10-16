@@ -28,17 +28,13 @@ namespace UtilityBot.Services.Configuration
         [JsonProperty("elevated_user_map")]
         public Dictionary<ulong, IEnumerable<ulong>> GuildRoleMap { get; set; } = new Dictionary<ulong, IEnumerable<ulong>>
         {
-            [81384788765712384] = new ulong[] // Discord API
+            [362225000348123136] = new ulong[] // Pokebip
             {
-                175643578071121920,     // Mod
-                111173097888993280,     // Contributor
-                209033538329116682,     // Proficient
+                366926672995418114     // Chef de Section
             },
-            [150482537465118720] = new ulong[] // Discord.Net 1.0 Dev
+            [369449808601022464] = new ulong[] //testserv
             {
-                151110145227751424,     // Volt
-                235852482725543936,     // Contributor
-                235852765216243712,     // Proficient
+                369461474483109898     // Admin supreme
             }
         };
 

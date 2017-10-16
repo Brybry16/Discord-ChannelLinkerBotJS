@@ -15,6 +15,7 @@ namespace ChannelLinkerBot.Modules
     {
         [Command("help")]
         [Alias("?")]
+        [RequireUserPermission(Discord.GuildPermission.Administrator)]
         public async Task help()
         {
             await Context.Channel.SendMessageAsync
@@ -30,6 +31,7 @@ namespace ChannelLinkerBot.Modules
                 );
         }
         [Command("resetlinks")]
+        [RequireUserPermission(Discord.GuildPermission.Administrator)]
         public async Task Reset()
         {
             try
@@ -54,6 +56,7 @@ namespace ChannelLinkerBot.Modules
 
         }
         [Command("showlinks")]
+        [RequireUserPermission(Discord.GuildPermission.Administrator)]
         public async Task showlinks()
         {
 
@@ -99,6 +102,7 @@ namespace ChannelLinkerBot.Modules
 
         }
         [Command("CreateLink")]
+        [RequireUserPermission(Discord.GuildPermission.Administrator)]
         public async Task link(ulong from, ulong to)
         {
             if (CommandHandler.ChannelsLinkedList.FindAll(x => x.ChannelCopyFrom == to).Count != 0)
@@ -121,6 +125,7 @@ namespace ChannelLinkerBot.Modules
 
         }
         [Command("prefix")]
+        [RequireUserPermission(Discord.GuildPermission.Administrator)]
         public async Task prefix([Optional][Remainder]string Userprefix)
         {
             CommandHandler.MessagePrefixList.Remove(CommandHandler.MessagePrefixList.Find(x => x.GuildID == Context.Guild.Id));

@@ -17,6 +17,8 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 using ChannelLinkerBot.DTO;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace UtilityBot
 {
@@ -64,6 +66,27 @@ namespace UtilityBot
 
         }
 
+/*        private async Task<string> ReplaceAsync(this Regex regex, string input, Func<Match, Task<string>> replacementFn)
+        {
+            var sb = new StringBuilder();
+            var lastIndex = 0;
+
+            foreach(Match match in regex.Matches(input))
+            {
+                sb.Append(input, lastIndex, match.Index - lastIndex)
+                    .Append(await replacementFn(match)
+                    .ConfigureAwait(false));
+
+                
+
+                lastIndex = match.Index + match.Length;
+            }
+
+            sb.Append(input, lastIndex, input.Length - lastIndex);
+
+            return sb.ToString();
+        }*/
+
         private async Task _client_MessageReceived(SocketMessage arg)
         {
             var message = arg as SocketUserMessage;
@@ -88,6 +111,14 @@ namespace UtilityBot
                             var From = context.Guild.TextChannels.Single(x => x.Id == s.ChannelCopyFrom);
 
                             var To = context.Guild.TextChannels.Single(x => x.Id == s.ChannelCopyTo);
+
+                            var Content = Regex.Replace(context.Message.Content.Replace("@everyone", "@ everyone").Replace("@here", "@ here"), @"<@(\d+)>", m => {
+
+                                SocketUser user = _client.GetUser(Convert.ToUInt64(m.ToString().Trim(new Char[] { '<', '@', '>' })));
+
+                                return "**" + user.Username + "#" + user.Discriminator + "**";
+                            });
+                            
                             MessagePrefixDTO prefix = new MessagePrefixDTO();
                             try
                             {
@@ -104,23 +135,23 @@ namespace UtilityBot
                                 {
                                     if (prefix.Prefix == "[EMBED]")
                                     {
-                                        await To.SendMessageAsync("", false, SimpleEmbed(new Color(1f, 1f, 1f), "Message in " + From.Name, context.Message.Content));
+                                        await To.SendMessageAsync("", false, SimpleEmbed(new Color(1f, 1f, 1f), "Message in " + From.Name, Content));
                                     }
                                     else
                                     {
-                                        await To.SendMessageAsync("", false, SimpleEmbed(new Color(1f, 1f, 1f), "Message in " + From.Name, prefix.Prefix.Replace("[EMBED]", "").Replace("[TIME]", "[" + DateTime.Now.ToString("HH:mm") + "]").Replace("[CHANNEL]", "**" + From.Name + "**").Replace("[USER]", context.User.Mention).Replace("[_USER_]", "**" + context.User.Username + "**") + "  :  " + context.Message.Content));
+                                        await To.SendMessageAsync("", false, SimpleEmbed(new Color(1f, 1f, 1f), "Message in " + From.Name, prefix.Prefix.Replace("[EMBED]", "").Replace("[TIME]", "[" + DateTime.Now.ToString("HH:mm") + "]").Replace("[CHANNEL]", "**" + From.Name + "**").Replace("[_CHANNEL_]", "<#" + From.Id + ">").Replace("[USER]", context.User.Mention).Replace("[_USER_]", "**" + context.User.Username + "#" + context.User.Discriminator + "**") + "  :  " + Content));
                                     }
 
                                 }
                                 else
                                 {
-                                    await To.SendMessageAsync("*" + prefix.Prefix.Replace("[TIME]", "[" + DateTime.Now.ToString("HH:mm") + "]").Replace("[CHANNEL]", "**" + From.Name + "**").Replace("[USER]", context.User.Mention).Replace("[_USER_]", "**" + context.User.Username + "**") + "* " + context.Message.Content);
+                                    await To.SendMessageAsync(prefix.Prefix.Replace("[TIME]", "[" + DateTime.Now.ToString("HH:mm") + "]").Replace("[CHANNEL]", "**" + From.Name + "**").Replace("[_CHANNEL_]", "<#" + From.Id + ">").Replace("[USER]", context.User.Mention).Replace("[_USER_]", "**" + context.User.Username + "#" + context.User.Discriminator + "**") + " " + Content);
                                 }
 
                             }
                             else
                             {
-                                await To.SendMessageAsync(context.Message.Content);
+                                await To.SendMessageAsync(Content);
                             }
 
 

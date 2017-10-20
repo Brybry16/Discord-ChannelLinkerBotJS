@@ -1,8 +1,8 @@
 {
-  "token": "YOUR TOKEN HERE",
+  "token": "MzY5NTczMTA3NjE2MTg2Mzcw.DMafTA.rWDW8kImiEUIXHTEKai87mvGnow",
   "command_activation_strings": [ "." ],
   "command_on_mention": true,
-  "channels": [ 81384956881809408, 150482537465118720 ],
+  "channels": [ 369449808601022466 ],
   "elevated_user_map": {
     "362225000348123136": [ 366926672995418114 ],
     "369449808601022464": [ 369461474483109898 ]

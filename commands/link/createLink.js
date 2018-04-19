@@ -1,0 +1,69 @@
+const { Command } = require('discord.js-commando');
+const fs = require('fs');
+const fileName = '../../linkedChannels.json';
+const guildsList = require(fileName);
+
+module.exports = class CreateLinkCommand extends Command {
+    constructor(client) {
+        super(client, {
+            name: 'createlink',
+            aliases: ['cl'],
+            memberName: 'createlink',
+            group: 'link',
+            description: 'adds a link to the guild',
+            examples: ['createlink'],
+            args: [
+                {
+                    key: 'from',
+                    prompt: 'From which channel do you want to copy the messages ?',
+                    type: 'channel'
+                },
+                {
+                    key: 'to',
+                    prompt: 'To which channel do you want to copy the messages ?',
+                    type: 'channel'
+                }
+            ]
+        });
+    }
+
+    alreadyExists(msg) {
+        return msg.say('This link already exists');
+    }
+
+    run(msg, { from, to }) {
+
+        if(from.id === to.id) {
+            return msg.say('Unable to create a link between only one channel');
+        }
+
+        const guildId = msg.guild.id;
+
+        // No link
+        if(!guildsList['guilds'].hasOwnProperty(guildId)) {
+            guildsList['guilds'][guildId] = {};
+        }
+
+        // Guild already have link(s)
+        if(!guildsList['guilds'][guildId].hasOwnProperty(from.id)) {
+            guildsList['guilds'][guildId][from.id] = [];
+        }
+
+        // Link is duplicate
+        if(guildsList['guilds'][guildId][from.id].indexOf(to.id) !== -1) {
+            return msg.say('The link you are attempting to create already exists');
+        }
+
+        guildsList['guilds'][guildId][from.id].push(to.id);
+
+        // Updating JSON file
+        fs.writeFile('./linkedChannels.json', JSON.stringify(guildsList, null, 4), function(err) {
+            if(err) {
+                return console.log(err);
+            }
+            console.log(JSON.stringify(guildsList, null, 2));
+        });
+
+        return msg.say('Link created.');
+    }
+};

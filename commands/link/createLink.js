@@ -12,6 +12,8 @@ module.exports = class CreateLinkCommand extends Command {
             group: 'link',
             description: 'adds a link to the guild',
             examples: ['createlink'],
+            guildOnly: true,
+            userPermissions: ['MANAGE_GUILD'],
             args: [
                 {
                     key: 'from',
@@ -25,10 +27,6 @@ module.exports = class CreateLinkCommand extends Command {
                 }
             ]
         });
-    }
-
-    alreadyExists(msg) {
-        return msg.say('This link already exists');
     }
 
     run(msg, { from, to }) {
@@ -63,6 +61,8 @@ module.exports = class CreateLinkCommand extends Command {
             }
             console.log(JSON.stringify(guildsList, null, 2));
         });
+
+        // this.client.emit('linkChange', guildsList);
 
         return msg.say('Link created.');
     }

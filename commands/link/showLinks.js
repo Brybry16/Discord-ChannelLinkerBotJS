@@ -9,7 +9,9 @@ module.exports = class ShowLinksCommand extends Command {
             memberName: 'showlinks',
             group: 'link',
             description: 'Show all the links',
-            examples: ['showlinks']
+            examples: ['showlinks'],
+            guildOnly: true,
+            userPermissions: ['MANAGE_GUILD']
         });
     }
 

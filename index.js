@@ -28,6 +28,11 @@ client.on('ready', () => {
 // Copie les messages sur les channels linkés
 client.on('message', msg => {
     try {
+        // Ne fait rien si on est dans un channel de DM
+        if(!msg.guild) {
+            return;
+        }
+
         // Ne copie pas si un bot a écrit le message ou si le serveur n'a pas de lien
         if((msg.content.length === 0 && msg.attachments.size === 0)
         || msg.author.bot
@@ -59,14 +64,7 @@ client.on('message', msg => {
                 // Envoi de message avec pièce jointe
                 if(msg.attachments.size > 0) {
                     msg.attachments.forEach((MA) => {
-                        let txt = '';
-                        switch(msg.content.length) {
-                            default:
-                                txt = formattedMsg + '\n\n';
-                            case 0:
-                                txt += 'Attachment:';
-                        }
-                        channel.send(txt, {
+                        channel.send(formattedMsg, {
                             files:
                                 [MA.url]
                             });

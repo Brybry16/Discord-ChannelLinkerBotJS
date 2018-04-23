@@ -59,7 +59,7 @@ module.exports = class CreateLinkCommand extends Command {
             if(err) {
                 return console.log(err);
             }
-            console.log(JSON.stringify(guildsList, null, 2));
+            // console.log(JSON.stringify(guildsList, null, 2));
         });
 
         // this.client.emit('linkChange', guildsList);

@@ -33,7 +33,7 @@ module.exports = class ResetLinksCommand extends Command {
             if(err) {
                 return console.log(err);
             }
-            console.log(JSON.stringify(guildsList, null, 2));
+            // console.log(JSON.stringify(guildsList, null, 2));
         });
 
         return msg.say('Links reseted.');

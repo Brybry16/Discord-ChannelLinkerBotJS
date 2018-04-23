@@ -27,9 +27,9 @@ client.on('ready', () => {
 // Copie les messages sur les channels linkés
 client.on('message', msg => {
     try {
-        // Ne copie pas si le bot a écrit le message ou si le serveur n'a pas de lien
+        // Ne copie pas si un bot a écrit le message ou si le serveur n'a pas de lien
         if((msg.content.length === 0 && msg.attachments.size === 0)
-        || msg.author.id === client.user.id
+        || msg.author.bot
         || !links.guilds.hasOwnProperty(msg.guild.id)) {
             return;
         }

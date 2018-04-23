@@ -2,6 +2,7 @@ const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
 const { prefix, token, owner } = require('./config.json');
 const links = require('./linkedChannels.json');
+const formats = require('./format.json');
 
 const client = new CommandoClient({
     commandPrefix: prefix,
@@ -41,6 +42,15 @@ client.on('message', msg => {
             return;
         }
 
+        // Récupère le format du message
+        const format = formats.hasOwnProperty(msg.guild.id) ? formats[msg.guild.id] : '\\m';
+
+        // Formattage du message
+        const formattedMsg = format.replace('\\t', new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute:'2-digit' }))
+                                    .replace('\\c', msg.channel)
+                                    .replace('\\u', msg.author.tag)
+                                    .replace('\\m', msg.cleanContent);
+
         // Copie des messages
         to.forEach(id => {
             const channel = client.channels.get(id);
@@ -52,7 +62,7 @@ client.on('message', msg => {
                         let txt = '';
                         switch(msg.content.length) {
                             default:
-                                txt = msg.content + '\n\n';
+                                txt = formattedMsg + '\n\n';
                             case 0:
                                 txt += 'Attachment:';
                         }
@@ -65,7 +75,7 @@ client.on('message', msg => {
 
                 // Envoi de message sans pièce jointe
                 else {
-                    channel.send(msg.content);
+                    channel.send(formattedMsg);
                 }
             }
         });

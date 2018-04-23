@@ -1,4 +1,4 @@
-# Discord.Net ChannelLinkerBot
+# discord.js Channel Linker bot
 
 ### Compiling
 This bot requires:

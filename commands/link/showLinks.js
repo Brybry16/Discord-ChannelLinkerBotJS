@@ -1,5 +1,5 @@
 const { Command } = require('discord.js-commando');
-const { guilds } = require('../../linkedChannels.json');
+const { guilds } = require('../../settings/linkedChannels.json');
 
 module.exports = class ShowLinksCommand extends Command {
     constructor(client) {

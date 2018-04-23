@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando');
 const fs = require('fs');
-const fileName = '../../linkedChannels.json';
+const fileName = '../../settings/linkedChannels.json';
 const guildsList = require(fileName);
 
 module.exports = class DeleteLinkCommand extends Command {
@@ -60,7 +60,7 @@ module.exports = class DeleteLinkCommand extends Command {
         }
 
         // Updating JSON file
-        fs.writeFile('./linkedChannels.json', JSON.stringify(guildsList, null, 4), function(err) {
+        fs.writeFile('./settings/linkedChannels.json', JSON.stringify(guildsList, null, 4), function(err) {
             if(err) {
                 return console.log(err);
             }

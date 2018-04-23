@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando');
 const fs = require('fs');
-const fileName = '../../format.json';
+const fileName = '../../settings/format.json';
 const formats = require(fileName);
 
 module.exports = class CreateLinkCommand extends Command {
@@ -39,11 +39,11 @@ module.exports = class CreateLinkCommand extends Command {
         }
 
         // Updating JSON file
-        fs.writeFile('./format.json', JSON.stringify(formats, null, 4), function(err) {
+        fs.writeFile('./settings/format.json', JSON.stringify(formats, null, 4), function(err) {
             if(err) {
                 return console.log(err);
             }
-            console.log(JSON.stringify(formats, null, 2));
+            // console.log(JSON.stringify(formats, null, 2));
         });
 
         return msg.say('Format updated.');

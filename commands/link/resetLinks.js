@@ -7,7 +7,7 @@ module.exports = class ResetLinksCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'resetlinks',
-            aliases: ['resetl'],
+            aliases: ['reset'],
             memberName: 'resetlinks',
             group: 'link',
             description: 'delete all the links in the guild',

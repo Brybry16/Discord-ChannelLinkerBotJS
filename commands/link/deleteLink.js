@@ -7,7 +7,7 @@ module.exports = class DeleteLinkCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'deletelink',
-            aliases: ['dl', 'reml'],
+            aliases: ['removelink', 'dl', 'rl'],
             memberName: 'deletelink',
             group: 'link',
             description: 'delete a links in the guild',

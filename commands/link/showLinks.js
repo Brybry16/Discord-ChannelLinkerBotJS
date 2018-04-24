@@ -5,7 +5,7 @@ module.exports = class ShowLinksCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'showlinks',
-            aliases: ['sl'],
+            aliases: ['sl', 'show'],
             memberName: 'showlinks',
             group: 'link',
             description: 'Show all the links',

@@ -11,7 +11,7 @@ module.exports = class CreateLinkCommand extends Command {
             memberName: 'format',
             group: 'msgformat',
             description: 'Sets default message format in which the message will be sent. Format modifiers are **\\u** (User tag), **\\t** (Time in HH:MM forat), **\\c** (Channel) and **\\m** (Message, _at the end by default)_. ',
-            examples: ['mi!format \\t \\c <\\*\\*\\u\\*\\*> gives [16:00] #channel <**Brybry#0001**> hello world'],
+            examples: ['mi!format [\\t] \\c <\\*\\*\\u\\*\\*> gives [16:00] #channel <**Brybry#0001**> hello world'],
             guildOnly: true,
             userPermissions: ['MANAGE_GUILD'],
             args: [

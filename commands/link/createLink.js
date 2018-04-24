@@ -7,11 +7,11 @@ module.exports = class CreateLinkCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'createlink',
-            aliases: ['cl'],
+            aliases: ['cl', 'create'],
             memberName: 'createlink',
             group: 'link',
             description: 'adds a link to the guild',
-            examples: ['createlink'],
+            examples: ['createlink #from #to', 'createlink from to'],
             guildOnly: true,
             userPermissions: ['MANAGE_GUILD'],
             args: [

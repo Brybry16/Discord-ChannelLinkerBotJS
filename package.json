@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@git.pokebip.com:2782/pokebip/Discord-ChannelLinkerBot.git"
+    "url": "https://github.com/Brybry16/Discord-ChannelLinkerBotJS.git"
   },
   "author": "Brybry",
   "license": "ISC"

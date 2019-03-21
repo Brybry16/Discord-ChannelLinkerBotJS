@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "discord.js": "^11.3.2",
-    "discord.js-commando": "github:discordjs/Commando#11.2"
+    "discord.js-commando": "github:discordjs/Commando#djs-v11"
   },
   "devDependencies": {
     "eslint": "^4.19.1"

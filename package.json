@@ -4,7 +4,7 @@
   "description": "Channel Linker Bot for Pokebip Discord server",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^11.3.2",
+    "discord.js": "^11.5.1",
     "discord.js-commando": "github:discordjs/Commando#djs-v11"
   },
   "devDependencies": {
